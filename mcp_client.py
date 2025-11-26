@@ -20,16 +20,6 @@ server = subprocess.Popen(
     )
 print("🔗 Connected to MCP server")
 
-server = subprocess.Popen(
-    [sys.executable, "mcp_server.py"],
-    stdin=subprocess.PIPE,
-    stdout=subprocess.PIPE,
-    stderr=subprocess.PIPE,
-    text=True,
-    bufsize=1
-)
-print("🔗 Connected to MCP server")
-
 def read_startup():
     while True:
         line = server.stderr.readline()
@@ -74,7 +64,7 @@ def call_mcp_tool(tool: str, args: Dict):
         "id": str(request_id),
         "method": "tools/call",
         "params": {"name": tool, "arguments": {"input": args}},
-    }
+        }
     server.stdin.write(json.dumps(req) + "\n")
     server.stdin.flush()
     response = server.stdout.readline().strip()
@@ -89,7 +79,7 @@ class S(TypedDict):
     tool_result: Any
     result: str
 
-# ---------------- AGENT LOGIC ----------------
+# ---------------- AGENT LOGIC  ----------------
 def route_request(state: S):
     """Use LLM to determine which tool to use and extract parameters"""
     
@@ -179,7 +169,7 @@ def generate_response(state: S):
         "result": response.choices[0].message.content
     }
 
-# Building LangGraph.
+# Building LangGraph. (not needed)
 g = StateGraph(S)
 g.add_node("route", route_request)
 g.add_node("respond", generate_response)
@@ -199,7 +189,7 @@ except Exception as e:
     print("Note: Install graphviz system dependency if needed: brew install graphviz\n")
 
 
-#Test
+#======== Test ============
 tests = [
     "What's the weather in Mumbai?",
     "Search for latest news about AI",
@@ -211,4 +201,5 @@ for t in tests:
 # Terminal
 #Run, python mcp_client.py
 #This will run the python file mcp_client.py and will give your the output of each test query.
+
 
