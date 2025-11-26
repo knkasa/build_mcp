@@ -1,0 +1,23 @@
+https://pub.towardsai.net/building-an-ai-agent-with-model-context-protocol-mcp-a-complete-guide-37b8f6cd7b2b
+https://pub.towardsai.net/building-an-ai-agent-with-model-context-protocol-mcp-a-complete-guide-37b8f6cd7b2b
+https://github.com/alphaiterations/mcp-server
+
+mcp-server/
+├── mcp_server.py           # MCP server implementation (FastMCP)
+├── mcp_client.py           # MCP client + LangGraph agent
+├── mcp-server.ipynb        # Jupyter notebook for testing
+├── requirements.txt        # Python dependencies
+├── .env                    # Environment variables (API keys)
+└── README.md   
+
+#Terminal
+git clone https://github.com/alphaiterations/mcp-server
+cd mcp-server
+pip install -r requirements.txt
+
+#.env
+# OpenAI API Key (required)
+OPEN_AI_KEY=your_openai_api_key_here
+
+# Serper API Key (required for web search)
+SERPER_API_KEY=your_serper_api_key_here
